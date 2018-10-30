@@ -5,6 +5,6 @@ defmodule DiscussWeb.TopicController do
   def new(conn, params) do
     changeset = Topic.changeset(%Topic{}, %{title: "Testing with a topic"})
 
-    render conn, "new.html"
+    render conn, "new.html", changeset: changeset
   end
 end

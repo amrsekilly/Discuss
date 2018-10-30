@@ -1,3 +1,7 @@
-<div>
- testing form 
-</div>
+<%= form_for @changeset, topic_path(@conn, :create), fn f -> %>
+  <label>
+    Topic: <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+  </label>
+
+  <%= submit "Save Topic", class: "btn btn-primary" %>
+<% end %>
