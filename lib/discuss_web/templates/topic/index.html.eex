@@ -7,3 +7,5 @@
     </li>
   <%= end %>
 </ul>
+
+<%= link("Add Topic", to: topic_path(@conn, :new)) %>
