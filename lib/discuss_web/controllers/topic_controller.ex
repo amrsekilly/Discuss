@@ -16,8 +16,18 @@ defmodule DiscussWeb.TopicController do
     render conn, "edit.html", changeset: changeset, topic: topic
   end
 
-  def update(conn, _params) do
-    
+  def update(conn, %{"id" => id, "topic" => topic}) do
+    changeset = Repo.get(Topic, id)
+    |> Topic.changeset(topic)
+
+    case Repo.update(changeset) do
+      {:ok, _topic} ->
+        conn
+        |> put_flash(:info, "Topic was updated properly!")
+        |> redirect(to: topic_path(conn, :index))
+      {:error, changeset} -> render conn, "edit.html", changeset: changeset
+    end
+
   end
 
   def index(conn, _params) do
@@ -28,7 +38,7 @@ defmodule DiscussWeb.TopicController do
   def create(conn, %{"topic" => topic}) do
     changeset = Topic.changeset(%Topic{}, topic)
     case Repo.insert(changeset) do
-      {:ok, post} -> 
+      {:ok, _topic} -> 
         conn
         |> put_flash(:info, "The topic was created")
         |> redirect(to: topic_path(conn, :index))
