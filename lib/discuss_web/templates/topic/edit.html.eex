@@ -1,0 +1,8 @@
+<%= form_for @changeset, topic_path(@conn, :update, @topic), fn f -> %>
+  <label>
+    Topic: <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+  </label>
+  <%= error_tag f, :title %>
+
+  <%= submit "Edit Topic", class: "btn btn-primary" %>
+<% end %>

@@ -19,6 +19,8 @@ defmodule DiscussWeb.Router do
     get "/", TopicController, :index
     get "/new", TopicController, :new
     post "/", TopicController, :create
+    get "/:id/edit", TopicController, :edit
+    put "/:id", TopicController, :update
   end
 
   # Other scopes may use custom stacks.
