@@ -17,15 +17,15 @@ defmodule DiscussWeb.TopicController do
   end
 
   def update(conn, %{"id" => id, "topic" => topic}) do
-    changeset = Repo.get(Topic, id)
-    |> Topic.changeset(topic)
+    old_topic = Repo.get(Topic, id)
+    changeset = Topic.changeset(old_topic, topic)
 
     case Repo.update(changeset) do
       {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic was updated properly!")
         |> redirect(to: topic_path(conn, :index))
-      {:error, changeset} -> render conn, "edit.html", changeset: changeset
+      {:error, changeset} -> render conn, "edit.html", changeset: changeset, topic: old_topic
     end
 
   end
