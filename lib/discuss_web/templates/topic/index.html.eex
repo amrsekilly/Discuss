@@ -4,6 +4,7 @@
   <%= for topic <- @topics do %>
     <li>
       <%= topic.title %>
+      <%= link("Edit", to: topic_path(@conn, :edit, topic.id)) %>
     </li>
   <%= end %>
 </ul>
