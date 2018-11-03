@@ -3,6 +3,8 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Topics.Topic
   alias Discuss.Repo
 
+  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
 
