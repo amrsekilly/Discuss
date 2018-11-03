@@ -1,6 +1,7 @@
 defmodule DiscussWeb.AuthController do
   use DiscussWeb, :controller
   alias Discuss.Users.User
+  alias Discuss.Repo
   plug Ueberauth
   
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => provider} = params) do
@@ -11,11 +12,14 @@ defmodule DiscussWeb.AuthController do
       provider: provider
     }
 
-    changeset = User.changeset(%User{}, user_params) 
+    User.changeset(%User{}, user_params) 
+    |> insert_update_user
 
-    IO.inspect "--------------"
-    IO.inspect changeset
-    IO.inspect "--------------"
+  end
 
+  defp insert_update_user(%{changes: %{email: email}} = changeset) do
+    IO.inspect "--------------"
+    IO.inspect email
+    IO.inspect "--------------"
   end
 end
