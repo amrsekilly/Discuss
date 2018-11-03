@@ -14,6 +14,15 @@
   <body>
     <nav>
       <%= link("Discussions", to: topic_path(@conn, :index)) %>
+      <ul>
+        <%= if @conn.assigns[:user] do %>
+          <li>
+            Logout
+          </li>
+        <%= else %>
+          <%= link "Signin with GH", to: auth_path(@conn, :request, "github") %>
+        <%= end %>
+      </ul>
     </nav>
     <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
