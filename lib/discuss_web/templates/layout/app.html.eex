@@ -16,8 +16,8 @@
       <%= link("Discussions", to: topic_path(@conn, :index)) %>
       <ul>
         <%= if @conn.assigns[:user] do %>
+          <%= content_tag(:p, @conn.assigns.user.username) %>
           <%= img_tag(@conn.assigns.user.photo, class: "image") %>
-          
           <li>
           <%= link "Logout", to: auth_path(@conn, :signout) %>
           </li>
