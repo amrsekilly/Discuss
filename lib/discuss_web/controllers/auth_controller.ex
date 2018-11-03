@@ -18,7 +18,17 @@ defmodule DiscussWeb.AuthController do
   end
 
   defp signin(changeset, conn) do
-    insert_update_user(changeset)
+    case insert_update_user(changeset) do
+      {:error, _} -> 
+        conn
+        |> put_flash(:error, "Something went wrong signing in!")
+        |> redirect(to: topic_path(conn, :index))
+      
+      {:ok, user} -> 
+        conn
+        |> put_flash(:info, "Welcome back, #{user.username}")
+        |> redirect(to: topic_path(conn, :index))        
+    end
   end
 
   defp insert_update_user(%{changes: %{email: email}} = changeset) do
