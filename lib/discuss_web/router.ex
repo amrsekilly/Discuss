@@ -13,7 +13,7 @@ defmodule DiscussWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/topics", DiscussWeb do
+  scope "/", DiscussWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", TopicController, :index
