@@ -7,6 +7,7 @@ defmodule Discuss.Users.User do
     field :email, :string
     field :provider, :string
     field :token, :string
+    field :username, :string
     timestamps()
   end
 
