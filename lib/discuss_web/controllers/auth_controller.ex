@@ -13,8 +13,12 @@ defmodule DiscussWeb.AuthController do
     }
 
     User.changeset(%User{}, user_params) 
-    |> insert_update_user
+    |> signin(conn)
 
+  end
+
+  defp signin(changeset, conn) do
+    insert_update_user(changeset)
   end
 
   defp insert_update_user(%{changes: %{email: email}} = changeset) do
