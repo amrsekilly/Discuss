@@ -27,6 +27,7 @@ defmodule DiscussWeb.AuthController do
       {:ok, user} -> 
         conn
         |> put_flash(:info, "Welcome back, #{user.username}")
+        |> put_session(:user_id, user.id)
         |> redirect(to: topic_path(conn, :index))        
     end
   end
