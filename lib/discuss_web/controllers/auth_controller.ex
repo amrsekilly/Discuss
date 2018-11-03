@@ -18,8 +18,9 @@ defmodule DiscussWeb.AuthController do
   end
 
   defp insert_update_user(%{changes: %{email: email}} = changeset) do
-    IO.inspect "--------------"
-    IO.inspect email
-    IO.inspect "--------------"
+    case Repo.get_by(User, email: email) do
+      nil -> Repo.insert(changeset)
+      user -> {:ok, user}
+    end
   end
 end
