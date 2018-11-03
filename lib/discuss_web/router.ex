@@ -24,6 +24,13 @@ defmodule DiscussWeb.Router do
     delete "/:id", TopicController, :delete
   end
 
+  scope "/auth", MyApp do
+    pipe_through :browser
+
+    get "/:github", AuthController, :request
+    get "/:github/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", DiscussWeb do
   #   pipe_through :api
