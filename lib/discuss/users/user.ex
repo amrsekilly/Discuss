@@ -8,12 +8,13 @@ defmodule Discuss.Users.User do
     field :provider, :string
     field :token, :string
     field :username, :string
+    field :photo, :string
     timestamps()
   end
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :provider, :token, :username])
+    |> cast(params, [:email, :provider, :token, :username, :photo])
     |> validate_required([:email, :provider, :token])
   end
 end

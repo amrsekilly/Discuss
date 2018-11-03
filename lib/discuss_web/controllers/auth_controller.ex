@@ -9,7 +9,8 @@ defmodule DiscussWeb.AuthController do
       token: auth.credentials.token, 
       email: auth.info.email, 
       username: auth.info.name,
-      provider: provider
+      provider: provider,
+      photo: auth.info.urls.avatar_url
     }
 
     User.changeset(%User{}, user_params) 
@@ -38,9 +39,13 @@ defmodule DiscussWeb.AuthController do
     end
   end
 
-  defp insert_update_user(%{changes: %{email: email}} = changeset) do
-    case Repo.get_by(User, email: email) do
-      nil -> Repo.insert(changeset)
+  defp insert_update_user(%{changes: %{email: email, photo: photo}} = changeset) do
+    case Repo.get_by(User, photo: photo) do
+      nil -> 
+        case user = Repo.get_by(User, email: email) do
+          nil -> Repo.insert(changeset)
+          user -> Repo.update!(Ecto.Changeset.change user, photo: photo)
+        end
       user -> {:ok, user}
     end
   end
