@@ -7,6 +7,11 @@ defmodule DiscussWeb.TopicController do
 
   plug :check_topic_owner when action in [:edit, :update, :delete]
 
+  def show(conn, %{"id" => topic_id }) do
+    topic = Repo.get!(Topic, topic_id)
+    render conn, "show.html", topic: topic    
+  end
+
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
 
@@ -14,7 +19,6 @@ defmodule DiscussWeb.TopicController do
   end
 
   def edit(conn, %{"id" => id}) do
-    # render conn, "edit.html", id: id
     topic = Repo.get(Topic, id)
     changeset = Topic.changeset(topic)
     render conn, "edit.html", changeset: changeset, topic: topic
