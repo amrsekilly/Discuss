@@ -1,3 +1,5 @@
 <h1>
   <%= @topic.title %>
 </h1>
+
+<button>Call WS!</button>
