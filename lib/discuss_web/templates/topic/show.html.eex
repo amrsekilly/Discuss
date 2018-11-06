@@ -1,5 +1,10 @@
 <h1>
   <%= @topic.title %>
 </h1>
-
-<button>Call WS!</button>
+<textarea></textarea>
+<button>Send Comment</button>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @topic.id %>)
+  })
+</script>
