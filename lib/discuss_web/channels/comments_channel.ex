@@ -10,8 +10,8 @@ defmodule DiscussWeb.CommentsChannel do
     {:ok, %{}, socket}
   end
 
-  def handle_in(name, message, socket) do
-    IO.inspect message
+  def handle_in(name, %{"content" => content}, socket) do
+    IO.inspect content
     {:reply, :ok, socket}
   end
 end
