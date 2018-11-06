@@ -12,7 +12,7 @@ defmodule Discuss.Comments.Comment do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:content, :user_id, :topic_id])
-    |> validate_required([:content, :user_id, :topic_id])
+    |> cast(params, [:content])
+    |> validate_required([:content])
   end
 end
