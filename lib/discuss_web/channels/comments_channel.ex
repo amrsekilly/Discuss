@@ -22,10 +22,10 @@ defmodule DiscussWeb.CommentsChannel do
       topic
         |> Ecto.build_assoc(:comments)
         |> Comment.changeset(%{content: content})
-        |> IO.inspect(label: "hello world")
     
     case Repo.insert(changeset) do
       {:ok, comment} -> 
+        broadcast!(socket, "channel:#{topic.topic_id}:new", %{comment: comment})
         {:reply, :ok, socket}
       {:error, _reason} -> 
         {:reply, {:error, %{errors: changeset}}, socket}
