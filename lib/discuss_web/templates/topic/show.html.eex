@@ -3,6 +3,7 @@
 </h1>
 <textarea></textarea>
 <button>Send Comment</button>
+<ul class="comments-list"></ul>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     window.createSocket(<%= @topic.id %>)
