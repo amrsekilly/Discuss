@@ -22,12 +22,10 @@ defmodule DiscussWeb.UserSocket do
   # performing token verification on connect.
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(DiscussWeb.Endpoint, "SomeStrongPassword", token) do
-      {:ok, id} -> 
-        {:ok, assign(socket, :user_id, id)}
+      {:ok, user_id} -> {:ok, assign(socket, :user_id, user_id)}
 
       {:error, _reason} -> :error
     end
-    {:ok, socket}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
