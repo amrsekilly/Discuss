@@ -10,10 +10,6 @@ defmodule DiscussWeb.CommentsChannel do
     |> Repo.get!(topic_id)
     |> Repo.preload(:comments)
 
-    IO.inspect "------------"
-    IO.inspect topic
-    IO.inspect "------------"
-
     {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end
 
@@ -25,7 +21,7 @@ defmodule DiscussWeb.CommentsChannel do
     
     case Repo.insert(changeset) do
       {:ok, comment} -> 
-        broadcast!(socket, "channel:#{topic.topic_id}:new", %{comment: comment})
+        broadcast!(socket, "channel:#{topic.id}:new", %{comment: comment})
         {:reply, :ok, socket}
       {:error, _reason} -> 
         {:reply, {:error, %{errors: changeset}}, socket}
