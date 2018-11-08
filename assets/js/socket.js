@@ -78,21 +78,24 @@ const createSocket = topicId => {
 }
 
 const renderComments = comments => {
-  // console.log('The comments are: ', comments);
   document.querySelector('.comments-list').innerHTML = 
-  comments.map(({ content }) => commentTemplate(content)).join('');
+  comments.map(({ content, user }) => commentTemplate(content, user)).join('');
 };
 
-const renderComment = ({ content }) => {
-  console.log('The comment to render is: ', content);
-  
+const renderComment = ({ content, user }) => {
    document.querySelector('.comments-list').innerHTML +=
-    commentTemplate(content);
+    commentTemplate(content, user);
 };
 
-const commentTemplate = content => (
+const commentTemplate = (content, user) => (
   `
     <li>
+      <b>
+        ${user ? 
+          user.username:
+          'Anonymous'
+        }
+      </b>
       ${content}
     </li>
   `
