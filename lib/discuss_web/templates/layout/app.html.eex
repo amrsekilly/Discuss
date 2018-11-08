@@ -9,6 +9,11 @@
 
     <title>Hello Discuss!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script>
+      <%= if @conn.assigns.user do %>
+        window.userToken = "<%= Phoenix.Token.sign(DiscussWeb.Endpoint, "SomeStrongPassword", @conn.assigns.user.id) %>"
+      <%= end %>
+    </script>
   </head>
 
   <body>
