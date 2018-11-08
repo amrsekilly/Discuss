@@ -9,3 +9,10 @@ defmodule Discuss.Repo do
     {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
   end
 end
+
+adapter: Ecto.Adapters.Postgres,
+username: "postgres",
+password: "postgres",
+database: "my_app_dev",
+pool_size: 10
+end
