@@ -23,10 +23,9 @@ defmodule DiscussWeb.UserSocket do
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(DiscussWeb.Endpoint, "SomeStrongPassword", token) do
       {:ok, id} -> 
-        IO.puts "------------"
-        IO.puts id
-        IO.puts "------------"
-      {:error, _reason} -> IO.puts "Authentication problem!"
+        {:ok, assign(socket, :user_id, id)}
+
+      {:error, _reason} -> :error
     end
     {:ok, socket}
   end
