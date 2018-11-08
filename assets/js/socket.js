@@ -92,7 +92,7 @@ const commentTemplate = (content, user) => (
     <li>
       <b>
         ${user ? 
-          user.username:
+          user.username :
           'Anonymous'
         }
       </b>
