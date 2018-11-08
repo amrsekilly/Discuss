@@ -10,9 +10,4 @@ defmodule Discuss.Repo do
   end
 end
 
-adapter: Ecto.Adapters.Postgres,
-username: "postgres",
-password: "postgres",
-database: "my_app_dev",
-pool_size: 10
 end
